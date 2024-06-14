@@ -17,7 +17,6 @@ let characters = "";
 
 length.addEventListener("input", () => {
   passwordLength = length.value;
-  console.log(passwordLength);
 });
 
 lower.addEventListener("click", () => {
@@ -46,7 +45,7 @@ numbers.addEventListener("click", () => {
 
 symbols.addEventListener("click", () => {
   if (symbols.checked) {
-    symbolsArr = "!@#$%^&*-+|/><~";
+    symbolsArr = "!@#$%^&*(){}[]=<>/,.";
   } else {
     symbolsArr = "";
   }
@@ -54,17 +53,20 @@ symbols.addEventListener("click", () => {
 
 function passwordGenerator(length) {
   let result = "";
+
   characters = lowerCase + upperCase + numbersArr + symbolsArr;
-  console.log(characters);
   let charactersLength = characters.length;
+
   while (result.length < length) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
-  console.log(result);
   password.textContent = result;
 }
 
 function copyPassword() {
+  if (!password) {
+    return;
+  }
   // Copy the text inside the text field
   navigator.clipboard.writeText(password.textContent);
 
